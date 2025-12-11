@@ -1,4 +1,4 @@
-## 1.0.0
+## 1.0.1
 
 * Add wrap mode in XText
 * Adjust readme.md
