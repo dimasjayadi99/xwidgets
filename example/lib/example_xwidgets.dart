@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:xwidgets/utils/x_textfield_options.dart';
-import 'package:xwidgets/widgets/shimmer/x_skeleton.dart';
-import 'package:xwidgets/xwidgets.dart';
+import 'package:xwidgets_pack/utils/x_textfield_options.dart';
+import 'package:xwidgets_pack/xwidgets.dart';
 
 class ExampleXwidgets extends StatefulWidget {
   const ExampleXwidgets({super.key});
@@ -37,6 +36,13 @@ class _ExampleXwidgetsState extends State<ExampleXwidgets> {
                 'X Text Example',
                 icon: Icon(Icons.android),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              XText(
+                'Long Text Example Long Text Example Long Text Example Long Text Example Long Text Example Long Text Example',
+                iconVerticalAlignment: .start,
+                isExpand: true,
+                icon: Icon(Icons.android),
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18),
               ),
               XSpacer(height: 8),
               XSingleDashedLine(),
