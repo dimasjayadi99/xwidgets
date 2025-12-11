@@ -5,7 +5,7 @@ customizable UI widgets to accelerate app development and improve
 consistency across projects. The library focuses on lightweight, well-documented
 components that are easy to style and compose.
 
-![Example](xwidgets.jpeg)
+![Example](xwidgets.png)
 
 ## Features
 
@@ -22,6 +22,8 @@ components that are easy to style and compose.
 - **XSpacer** — Utility widget to insert flexible space between widgets.
 - **XTextField** — Enhanced text field with validation hooks and prefined styles.
 - **XText** — Convenience text widget consolidating common text styles.
+- **XShimmer** - Wrapper widget that provides a smooth shimmer animation effect, commonly
+  used for loading placeholders.
 
 ## Installation
 
@@ -65,6 +67,19 @@ XTextField(
   controller: myController,
   fieldType: .file
   validator: (v) => v == null || v.isEmpty ? 'Required' : null,
+);
+
+// Using XShimmer directly
+// Wrap any widget with a shimmer effect
+XShimmer(
+  child: YourWidget(),
+);
+
+// Using XSkeleton for common placeholder needs
+// Quick skeleton-style loading block
+XSkeleton(
+  width: 80,
+  height: 80,
 );
 ```
 
