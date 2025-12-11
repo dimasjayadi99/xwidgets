@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:xwidgets/utils/x_textfield_options.dart';
+import 'package:xwidgets/widgets/shimmer/x_skeleton.dart';
 import 'package:xwidgets/xwidgets.dart';
 
 class ExampleXwidgets extends StatefulWidget {
@@ -14,6 +15,7 @@ class ExampleXwidgets extends StatefulWidget {
 class _ExampleXwidgetsState extends State<ExampleXwidgets> {
   var isLoadingButtonTitle = false;
   var isLoadingButtonCustom = false;
+  var isLoadingShimmerCustom = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,9 @@ class _ExampleXwidgetsState extends State<ExampleXwidgets> {
         margin: EdgeInsets.all(16),
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
-          child: Column(
+          child: isLoadingShimmerCustom
+              ? exampleShimmerList()
+              : Column(
             children: [
               XText(
                 'X Text Example',
@@ -74,6 +78,17 @@ class _ExampleXwidgetsState extends State<ExampleXwidgets> {
                   ],
                 ),
               ),
+              XSpacer(height: 8),
+              XButton(
+                height: 56,
+                isLoading: isLoadingShimmerCustom,
+                onPressed: () async {
+                  setState(() => isLoadingShimmerCustom = true);
+                  await Future.delayed(Duration(seconds: 2));
+                  setState(() => isLoadingShimmerCustom = false);
+                },
+                child: Text('XShimmer Loading View'),
+              ),
               XSpacer(height: 16),
               XTextField(labelOnLine: 'Nama', hintText: 'Siapa namamu?'),
               XSpacer(height: 8),
@@ -119,4 +134,43 @@ class _ExampleXwidgetsState extends State<ExampleXwidgets> {
     await Future.delayed(Duration(seconds: 2));
     XSnackbar.success('XButton Pressed', position: .bottom);
   }
+}
+
+Widget exampleShimmerList() {
+  int itemCount = 5;
+
+  return ListView.separated(
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(),
+    itemCount: itemCount,
+    itemBuilder: (context, index) {
+      var screenWidth = MediaQuery.of(context).size.width;
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          XSkeleton(width: 80, height: 80),
+          XSpacer(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                XSkeleton(height: 16, width: double.infinity),
+                XSpacer(height: 8),
+                XSkeleton(
+                  height: 16,
+                  width: screenWidth * 0.5,
+                ),
+                XSpacer(height: 8),
+                XSkeleton(
+                  height: 16,
+                  width: screenWidth * 0.3,
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    },
+    separatorBuilder: (context, index) => XSpacer(height: 16),
+  );
 }
