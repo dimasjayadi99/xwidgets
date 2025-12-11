@@ -31,7 +31,7 @@ Or if published on pub.dev, use the latest version:
 
 ```yaml
 dependencies:
-  xwidgets: ^1.0.0
+  xwidgets: ^latest
 ```
 
 Then run:
